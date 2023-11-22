@@ -7,8 +7,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 
-import matplotlib.ticker as ticker
-
 # Need to import this to use plt.plot because of UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.
 # but there issue importing this on lab machine so cannot display graph directly in GUI
 # Gettubg this error ImportError: cannot import name 'ImageTk' from 'PIL'
@@ -17,7 +15,7 @@ import matplotlib.ticker as ticker
 # from matplotlib.figure import Figure 
 # from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk) 
   
-
+# global vars for the sentence report history 
 totalSentenceCount = 0
 sentenceLengthHistory = []
 alphaCountHistory = []
@@ -71,7 +69,7 @@ def sentence_report():
                     if isEndStart == True:
                         endStartCount += 1
 
-    
+    # adding stat values to history
     alphaCountHistory.append(alphaCount)
     repeatCountHistory.append(repeatCount)
     endStartCountHistory.append(endStartCount)
@@ -124,26 +122,19 @@ def generate_graph():
     global repeatCountHistory
     global endStartCountHistory
 
-    #xValue = range(1, totalSentenceCount)
+    # gets the horizontal values for the graph (1 to total number of report)
     xValue = np.arange(1, totalSentenceCount+1)
 
-    print(str(totalSentenceCount))
-    print(xValue)
-    print(str(alphaCountHistory))
-
-
-
-    # fig, ax = plt.subplots()
-    # for axis in [ax.xaxis, ax.yaxis]:
-    #     axis.set_major_locator(ticker.MaxNLocator(integer=True))
-
-
+    # do nothing when there is no history yet, don't create a graph
+    if totalSentenceCount == 0:
+        return;
 
     # 1500 x 1000 pixels in size
     plt.figure(figsize=(15, 10))
 
     plt.title("History of Sentence Statistics")
     plt.xlabel("Sentence report #")
+    # setting different markers for the points on the graph
     plt.plot(xValue, alphaCountHistory, marker='o', label = "Total number of alphabetic characters")
     plt.plot(xValue, repeatCountHistory, marker='x', label = "Total number of words with repeated alphabetic characters")
     plt.plot(xValue, endStartCountHistory, marker='D', label = "Total number of end-start letter matches")
@@ -151,19 +142,11 @@ def generate_graph():
     # default will go the best position to avoid lines, can also specifiy by cords or position
     plt.legend()
 
-    # sets the x labels of the plot as integers
+    # ensures that there an a horizontal ticker for every sentence report
     new_list = range(math.floor(min(xValue)), math.ceil(max(xValue))+1)
     plt.xticks(new_list)
 
-    #plt.ylim(ymin=0.0)
-    #plt.locator_params(axis='y', nbins=10) 
-    
-
-    #plt.gca().yaxis.set_major_locator(ticker.MultipleLocator(2))
-    #plt.locator_params(axis='y', nbins=10)
-
-
-    #this works by saving as image
+    #this works by saving as image, had to do this instead of directly in GUI becuase of library issues
     plt.savefig("SentenceReportStatisticsHistory.png")
 
 
@@ -209,7 +192,7 @@ clear_button = tk.Button(buttonFrame, text="Clear Text", bg="#69b2bf", command=c
 clear_button.grid(sticky="w", row=0, column=1)
 
 #creating the button to clear the text in the entry widget
-graph_button = tk.Button(buttonFrame, text="Generate Graph", bg="#f542ec", command=generate_graph)
+graph_button = tk.Button(buttonFrame, text="Download Sentence Report History Graph", bg="#f542ec", command=generate_graph)
 graph_button.grid(sticky="w", row=0, column=2, padx=10)
 
 
