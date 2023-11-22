@@ -1,11 +1,40 @@
 
-#This program is Python PQ1 converted to use GUI instead of a textual interface
+#This program is Python PQ1 converted to use GUI instead of a textual interface, Now has a plotting feature
 #to run just type "python3 sentenceReportGUI.py"
+
 import tkinter as tk
 import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+import matplotlib.ticker as ticker
+
+# Need to import this to use plt.plot because of UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.
+# but there issue importing this on lab machine so cannot display graph directly in GUI
+# Gettubg this error ImportError: cannot import name 'ImageTk' from 'PIL'
+# import matplotlib
+# matplotlib.use("TkAgg")
+# from matplotlib.figure import Figure 
+# from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk) 
+  
+
+totalSentenceCount = 0
+sentenceLengthHistory = []
+alphaCountHistory = []
+repeatCountHistory = []
+endStartCountHistory = []
+
 
 #function for the sentence report button action
 def sentence_report():
+
+    global totalSentenceCount
+    global sentenceLengthHistory
+    global alphaCountHistory
+    global repeatCountHistory
+    global endStartCountHistory
+
+    totalSentenceCount = totalSentenceCount + 1
 
     alphaCount = 0
     repeatCount = 0
@@ -13,6 +42,7 @@ def sentence_report():
     
     #gets the string from the entry widget
     inputString = input_Entry.get()
+    sentenceLengthHistory.append(len(inputString))
 
     #splits string into a list of words
     splitString = inputString.split()
@@ -40,6 +70,11 @@ def sentence_report():
                     isEndStart = end_start(string, cleanStringList[index + 1])
                     if isEndStart == True:
                         endStartCount += 1
+
+    
+    alphaCountHistory.append(alphaCount)
+    repeatCountHistory.append(repeatCount)
+    endStartCountHistory.append(endStartCount)
 
     #updates the label widgets with the new statistics
     character_Number_Label.config(text="Total number of alphabetic characters: " + str(alphaCount))
@@ -81,6 +116,55 @@ def exit():
 def clear():
     input_Entry.delete(0, "end")
 
+def generate_graph():
+
+    global totalSentenceCount
+    global sentenceLengthHistory
+    global alphaCountHistory
+    global repeatCountHistory
+    global endStartCountHistory
+
+    #xValue = range(1, totalSentenceCount)
+    xValue = np.arange(1, totalSentenceCount+1)
+
+    print(str(totalSentenceCount))
+    print(xValue)
+    print(str(alphaCountHistory))
+
+
+
+    # fig, ax = plt.subplots()
+    # for axis in [ax.xaxis, ax.yaxis]:
+    #     axis.set_major_locator(ticker.MaxNLocator(integer=True))
+
+
+
+    # 1500 x 1000 pixels in size
+    plt.figure(figsize=(15, 10))
+
+    plt.title("History of Sentence Statistics")
+    plt.xlabel("Sentence report #")
+    plt.plot(xValue, alphaCountHistory, marker='o', label = "Total number of alphabetic characters")
+    plt.plot(xValue, repeatCountHistory, marker='x', label = "Total number of words with repeated alphabetic characters")
+    plt.plot(xValue, endStartCountHistory, marker='D', label = "Total number of end-start letter matches")
+    
+    # default will go the best position to avoid lines, can also specifiy by cords or position
+    plt.legend()
+
+    # sets the x labels of the plot as integers
+    new_list = range(math.floor(min(xValue)), math.ceil(max(xValue))+1)
+    plt.xticks(new_list)
+
+    #plt.ylim(ymin=0.0)
+    #plt.locator_params(axis='y', nbins=10) 
+    
+
+    #plt.gca().yaxis.set_major_locator(ticker.MultipleLocator(2))
+    #plt.locator_params(axis='y', nbins=10)
+
+
+    #this works by saving as image
+    plt.savefig("SentenceReportStatisticsHistory.png")
 
 
 root = tk.Tk()
@@ -121,8 +205,12 @@ sentence_report_button = tk.Button(buttonFrame, text="Get the sentence report", 
 sentence_report_button.grid(sticky="w", row=0, column=0, padx=10)
 
 #creating the button to clear the text in the entry widget
-exit_button = tk.Button(buttonFrame, text="Clear Text", bg="#69b2bf", command=clear)
-exit_button.grid(sticky="w", row=0, column=1)
+clear_button = tk.Button(buttonFrame, text="Clear Text", bg="#69b2bf", command=clear)
+clear_button.grid(sticky="w", row=0, column=1)
+
+#creating the button to clear the text in the entry widget
+graph_button = tk.Button(buttonFrame, text="Generate Graph", bg="#f542ec", command=generate_graph)
+graph_button.grid(sticky="w", row=0, column=2, padx=10)
 
 
 #adding button frame to root grid
