@@ -16,30 +16,20 @@ The package selected is Matplotlib. <br />
 
 - What purpose does it serve
 
-Matplotlib is a widely used open-source data visualization and plotting library for python [1]. It is a python alternative to MATLAB and provides static, animated, and interactive visualizations including scatter plots, bar charts, histograms, error charts, pie charts, box plots, line graphs, etc. [2][3]. It provides the foundation to many popular data analysis/visualization libraries such as Pandas and Seaborn [3].
- <br />
-
+Matplotlib is a widely used open-source data visualization and plotting library for python [1]. It is a python alternative to MATLAB and provides 2D and 3D static, animated, interactive, visualizations including scatter plots, bar charts, histograms, error charts, pie charts, box plots, line graphs, etc. [2][3]. It provides the foundation to many popular data analysis/visualization libraries such as Pandas and Seaborn [3]. The versatility of this library allows for very basic and very complex data representation and design, however requiring a lot of code for customizaiton [4].
 
  <br />
-References: <br />
-[1] https://www.testgorilla.com/blog/matplotlib-in-python/  <br />
-[2] https://matplotlib.org/  <br />
-[3] https://www.scaler.com/topics/matplotlib/matplotlib-in-python/ <br />
-[image] https://matplotlib.org/3.1.1/api/pyplot_summary.html <br />
-
- <br /><br />
 
 - How do you use it
 
 Get a data set, choose a graph to best represent the data and plot it.
  <br /> 
- <br />
 
 <img src="https://github.com/CS2613-FA23/explorationactivity2-SubyDoo/assets/93729876/876ae825-ab69-42a9-bccb-2219d99f20a5" width=90% height=90%> <br />
-Description: image of the graph referenced. For full see code [sentenceReportGUI.py](https://github.com/CS2613-FA23/explorationactivity2-SubyDoo/blob/main/sentenceReportGUI.py)
+Description: image of the graph produced by the code in [sentenceReportGUI.py](https://github.com/CS2613-FA23/explorationactivity2-SubyDoo/blob/main/sentenceReportGUI.py)
 
 
-In order to use Matplotlib you need to import it.
+In order to use Matplotlib you need to import it, here we are using pyplot which is a collection of functions to provide similar functionality to MATLAB
 ```
 import matplotlib.pyplot as plt
 ```
@@ -56,13 +46,14 @@ endStartCountHistory = []
 
 After each report data will be added to the lists
 ```
-totalSentenceCount = totalSentenceCount + 1
-
-... CODE TO GET STATS FOR STRING
-
-alphaCountHistory.append(alphaCount)
-repeatCountHistory.append(repeatCount)
-endStartCountHistory.append(endStartCount)
+def sentence_report():
+    totalSentenceCount = totalSentenceCount + 1
+    
+    ... CODE TO GET STATS FOR STRING
+    
+    alphaCountHistory.append(alphaCount)
+    repeatCountHistory.append(repeatCount)
+    endStartCountHistory.append(endStartCount)
 ```
 <br />
 
@@ -102,13 +93,18 @@ plt.plot(xValue, endStartCountHistory, marker='D', label = "Total number of end-
 ```
 <br />
 
+These are just a few examples of the types and the level of customization you can do for data representation  
+<br /> 
+<img src="https://github.com/CS2613-FA23/explorationactivity2-SubyDoo/assets/93729876/544a4fba-4e7b-472c-b6fb-dfd64724b37f" width=90% height=90%> <br />
+
+
 Here we will display the legend to display the line titles. By default it will go the best position to avoid lines but you can also specifiy its placement by coordinates or position.
 ```
 plt.legend()
 ```
 <br />
 
-This 
+These lines are ensuring that all report numbers are represented as a horizontal tick. It also makes sure that only integers are displayed.
 ```
 new_list = range(math.floor(min(xValue)), math.ceil(max(xValue))+1)
 plt.xticks(new_list)
@@ -120,10 +116,7 @@ Here we will save the graph as image, we had to do this instead of displaying it
 plt.savefig("SentenceReportStatisticsHistory.png")
 ```
 <br />
-
-
- 
- <br />
+<br />
 
 
 
@@ -132,10 +125,8 @@ plt.savefig("SentenceReportStatisticsHistory.png")
 
  
 ## 3. When was it created?
-Matplotlib was created by John D. Hunter in 2002 during his post-doctoral study in neurobiology [1]. 
+Matplotlib was created by John D. Hunter in 2002 during his post-doctoral study in neurobiology [5]. 
 
-References: <br />
-[1] https://www.scaler.com/topics/matplotlib/matplotlib-in-python/ <br />
  
  <br />
 
@@ -180,4 +171,12 @@ I would continue to use this library with the Pandas library for data analysis, 
 
  <br />
 
- 
+ ## 7. References 
+
+[1] https://www.testgorilla.com/blog/matplotlib-in-python/  <br />
+[2] https://matplotlib.org/  <br />
+[3] https://www.scaler.com/topics/matplotlib/matplotlib-in-python/ <br />
+[4] https://www.datacamp.com/tutorial/matplotlib-tutorial-python <br />
+[5] https://towardsdatascience.com/visualizations-with-matplotlib-part-1-c9651008b6b8 <br />
+[image] https://matplotlib.org/3.1.1/api/pyplot_summary.html <br />
+[image] https://www.testgorilla.com/blog/matplotlib-in-python/  <br />
