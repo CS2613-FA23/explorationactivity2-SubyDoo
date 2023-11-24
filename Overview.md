@@ -16,7 +16,7 @@ The package selected is Matplotlib. <br />
 
 - What purpose does it serve
 
-Matplotlib is a widely used open-source data visualization and plotting library for python [1]. It is a python alternative to MATLAB and provides 2D and 3D static, animated, interactive, visualizations including scatter plots, bar charts, histograms, error charts, pie charts, box plots, line graphs, etc. [2][3]. It provides the foundation to many popular data analysis/visualization libraries such as Pandas and Seaborn [3]. The versatility of this library allows for very basic and very complex data representation and design, however requiring a lot of code for customizaiton [4].
+Matplotlib is a widely used open-source data visualization and plotting library for python [1]. It is a python alternative to MATLAB and provides 2D and 3D static, animated, interactive, visualizations including scatter plots, bar charts, histograms, error charts, pie charts, box plots, line graphs, etc. [2][3]. It provides the foundation to many popular data analysis/visualization libraries such as Pandas and Seaborn [3]. The versatility of this library allows for very basic and very complex data representation and design, however requiring a lot of code for customization [4].
 
  <br />
 
@@ -98,20 +98,20 @@ These are just a few examples of the types and the level of customization you ca
 <img src="https://github.com/CS2613-FA23/explorationactivity2-SubyDoo/assets/93729876/544a4fba-4e7b-472c-b6fb-dfd64724b37f" width=90% height=90%> <br />
 
 
-Here we will display the legend to display the line titles. By default it will go the best position to avoid lines but you can also specifiy its placement by coordinates or position.
+Here we will display the legend to display the line titles. By default it will go the best position to avoid lines but you can also specify its placement by coordinates or position.
 ```
 plt.legend()
 ```
 <br />
 
-These lines are ensuring that all report numbers are represented as a horizontal tick. It also makes sure that only integers are displayed.
+These lines ensure that all report numbers are represented as a horizontal tick. It also makes sure that only integers are displayed.
 ```
 new_list = range(math.floor(min(xValue)), math.ceil(max(xValue))+1)
 plt.xticks(new_list)
 ```
 <br />
 
-Here we will save the graph as image, we had to do this instead of displaying it directly in GUI becuase of some library import issues on the lab machine
+Here we will save the graph as image, we had to do this instead of displaying it directly in GUI because of some library import issues on the lab machine
 ```
 plt.savefig("SentenceReportStatisticsHistory.png")
 ```
