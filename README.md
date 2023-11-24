@@ -36,7 +36,7 @@ The program will take a string as an input thought the GUI and report some stati
 
 There are a few buttons to interact with but the one of focus for this exploratory activity is the "**Download Sentence Report History Graph**" button which will graph the history of the statistical results into a png image using Matplotlib. 
 > [!NOTE]
-> Unfortunalty due to some library issues on the lab machines, <br />
+> Unfortunately due to some library issues on the lab machines, <br />
 > the graph could not be displayed directly in the GUI and so it is saved as an image
 
 <br /> <br />
@@ -59,7 +59,7 @@ This program demonstrates:
 - sentenceReportGUI.py
   - run the program to get this initial state <br /> <img src="https://github.com/CS2613-FA23/explorationactivity2-SubyDoo/assets/93729876/2689cdbf-4f69-46c1-ae28-f2646e5573ef" width=80% height=80%> <br />
   - input some text into the textbox and click the "Get the sentence report" button, the labels will update with the statistics <br /> <img src="https://github.com/CS2613-FA23/explorationactivity2-SubyDoo/assets/93729876/ed57193f-c072-4300-a939-c1a9961b1db2" width=80% height=80%> <br />
-  - keep typing new sentances and clicking the "Get the sentence report" button to get a report and add the data to the history
+  - keep typing new sentences and clicking the "Get the sentence report" button to get a report and add the data to the history
   - Once you want to get the history of the statistics, click the "Download Sentence Report History Graph" button, the graph should be downloaded in the same directory as the program <br />
   
 - SentenceReportStatisticsHistory.png
